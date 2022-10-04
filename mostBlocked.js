@@ -13,19 +13,30 @@ function mostBlocked (data) {
        } 
     })
 
-  
+    console.log(statesCount)
+
     let objValues = Object.values(statesCount)
     let maxValue = Math.max(...objValues)
 
-    let mostBlockStates = []
+    let mostBlockedStates = []
     Object.keys(statesCount).map(key => {
         return (statesCount[key] === maxValue ?
-            mostBlockStates.push(key)
+            mostBlockedStates.push(key)
             : null)
     })
 
-    console.log(mostBlockStates)
-    console.log(objValues)
+    let blockedUsers = []
+    data.map((current) => {
+        if (mostBlockedStates.indexOf(current.address.state) != -1) {
+            return blockedUsers.push(
+                {"first_name": current.first_name,
+                "last_name": current.last_name,
+                "address" : current.address}
+            )
+        }
+    })
+
+    // console.log(blockedUsers)
 }
 
 
