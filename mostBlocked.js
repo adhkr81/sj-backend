@@ -3,27 +3,54 @@ fs = require('fs')
 
 function mostBlocked (data) {
     
-    const statesCount = {}
+    // const statesCount = {}
+    const statesCountTest = []
 
-    data.map((current) => {
-       if (current.subscription.status === "Blocked") {
-        return (statesCount[current.address.state] = statesCount[current.address.state]
-            ? statesCount[current.address.state] += 1
-            : 1)            
+
+    // for (let i = 0; i < data.length; i++) {
+    //     if (data[i].subscription.status === "Blocked") {
+    //         statesCount[data[i].address.state] = statesCount[data[i].address.state]
+    //                     ? statesCount[data[i].address.state] += 1
+    //                     : 1                                  
+    //        } 
+    // }
+
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].subscription.status === "Blocked") {
+            
+            if (statesCountTest[data[i].address.state] === undefined) {
+                statesCountTest.push({[data[i].address.state] : {count: 1, users: {"first_name": data[i].first_name,
+                                                                                "last_name": data[i].last_name,
+                                                                                "address" : data[i].address}} })  
+            }
        } 
-    })
+    }
 
-    console.log(statesCount)
+    
 
-    let objValues = Object.values(statesCount)
-    let maxValue = Math.max(...objValues)
+    console.log(statesCountTest)
 
-    let mostBlockedStates = []
-    Object.keys(statesCount).map(key => {
-        return (statesCount[key] === maxValue ?
-            mostBlockedStates.push(key)
-            : null)
-    })
+
+    const keys = Object.keys(statesCount)
+    let count = 0
+    mostBlockedStates = []
+
+    for (let j = 0; j < keys.length; j++) {
+
+        if(statesCount[keys[j]] > count) {
+            mostBlockedStates = [keys[j]]
+            count = statesCount[keys[j]] 
+        } else if (statesCount[keys[j]] === count) {
+            mostBlockedStates.push(keys[j])
+        } 
+    }
+
+
+    console.log(count)
+    console.log(mostBlockedStates)
+
+
 
     let blockedUsers = []
     data.map((current) => {
@@ -53,3 +80,7 @@ fs.readFile('./data.json', 'utf8', function (err, data) {
     jsonFile = JSON.parse(data)
     mostBlocked(jsonFile)
   });
+
+
+
+// {"Utah" : {count: Number , users: {}}}
