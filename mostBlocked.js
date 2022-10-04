@@ -4,7 +4,7 @@ fs = require('fs')
 function mostBlocked (data) {
     
 
-    const statesCount = {}
+
     // const statesCountOld = {}
 
     // for (let i = 0; i < data.length; i++) {
@@ -15,8 +15,11 @@ function mostBlocked (data) {
     //        } 
     // }
 
+    const statesCount = {}
+    let highestNumber;
 
     for (let i = 0; i < data.length; i++) {
+        
         if (data[i].subscription.status === "Blocked") {
 
           if (statesCount[data[i].address.state] === undefined) {
@@ -36,9 +39,31 @@ function mostBlocked (data) {
                     first_name: data[i].first_name,
                     last_name: data[i].last_name,
                     address: data[i].address,
-                  }               ]
+                  }]
               } 
           }
+
+        } else {
+            if (statesCount[data[i].address.state] === undefined) {
+                statesCount[data[i].address.state] = {
+                    count: 0,
+                  users: [{
+                          first_name: data[i].first_name,
+                          last_name: data[i].last_name,
+                          address: data[i].address,
+                        }]
+                } 
+              } else {
+                statesCount[data[i].address.state] = {
+                    count: statesCount[data[i].address.state].count,
+                    users: [...statesCount[data[i].address.state].users, 
+                        {
+                        first_name: data[i].first_name,
+                        last_name: data[i].last_name,
+                        address: data[i].address,
+                      }]
+                  } 
+              }
         }
       }
 
