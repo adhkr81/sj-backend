@@ -15,19 +15,7 @@ function mostBlocked (data) {
     //        } 
     // }
 
-        // const keys = Object.keys(statesCount)
-    // let count = 0
-    // mostBlockedStates = []
 
-    // for (let j = 0; j < keys.length; j++) {
-
-    //     if(statesCount[keys[j]] > count) {
-    //         mostBlockedStates = [keys[j]]
-    //         count = statesCount[keys[j]] 
-    //     } else if (statesCount[keys[j]] === count) {
-    //         mostBlockedStates.push(keys[j])
-    //     } 
-    // }
 
     const statesCount = {}
     let highestNumber = 0
@@ -90,23 +78,20 @@ function mostBlocked (data) {
 
 
 
-    console.log(statesCount)
-    console.log(highestNumber)
+    const keys = Object.keys(statesCount)
+    mostBlockedStates = []
+
+    for (let j = 0; j < keys.length; j++) {
+
+        if (statesCount[keys[j]].count === highestNumber) {
+            mostBlockedStates.push(keys[j])
+        }
+    }
 
 
+    console.log("State with most blocked users are",mostBlockedStates)
+    console.log("Highest number of blocked users per state is",highestNumber)
 
-    // let blockedUsers = []
-    // data.map((current) => {
-    //     if (mostBlockedStates.indexOf(current.address.state) != -1) {
-    //         return blockedUsers.push(
-    //             {"first_name": current.first_name,
-    //             "last_name": current.last_name,
-    //             "address" : current.address}
-    //         )
-    //     }
-    // })
-
-    // console.log(blockedUsers)
 }
 
 
