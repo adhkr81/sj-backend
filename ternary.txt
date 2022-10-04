@@ -1,0 +1,9 @@
+    // const statesCountOld = {}
+
+    // for (let i = 0; i < data.length; i++) {
+    //     if (data[i].subscription.status === "Blocked") {
+    //         statesCountOld[data[i].address.state] = statesCountOld[data[i].address.state]
+    //                     ? statesCountOld[data[i].address.state] += 1
+    //                     : 1                                  
+    //        } 
+    // }

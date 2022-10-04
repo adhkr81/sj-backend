@@ -3,20 +3,6 @@ fs = require('fs')
 
 function mostBlocked (data) {
     
-
-
-    // const statesCountOld = {}
-
-    // for (let i = 0; i < data.length; i++) {
-    //     if (data[i].subscription.status === "Blocked") {
-    //         statesCountOld[data[i].address.state] = statesCountOld[data[i].address.state]
-    //                     ? statesCountOld[data[i].address.state] += 1
-    //                     : 1                                  
-    //        } 
-    // }
-
-
-
     const statesCount = {}
     let highestNumber = 0
 
@@ -77,7 +63,6 @@ function mostBlocked (data) {
       }
 
 
-
     const keys = Object.keys(statesCount)
     mostBlockedStates = []
 
@@ -91,12 +76,7 @@ function mostBlocked (data) {
 
     console.log("State with most blocked users are",mostBlockedStates)
     console.log("Highest number of blocked users per state is",highestNumber)
-
 }
-
-
-
-
 
 
 let jsonFile;
