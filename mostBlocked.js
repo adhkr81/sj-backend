@@ -22,21 +22,21 @@ function mostBlocked (data) {
           if (statesCount[data[i].address.state] === undefined) {
             statesCount[data[i].address.state] = {
               count: 1,
-              users: {
+              users: [{
                       first_name: data[i].first_name,
                       last_name: data[i].last_name,
                       address: data[i].address,
-                    }
+                    }]
             } 
           } else {
             statesCount[data[i].address.state] = {
                 count: statesCount[data[i].address.state].count + 1,
-                users: {...statesCount[data[i].address.state].users, 
-                    ...{
+                users: [...statesCount[data[i].address.state].users, 
+                    {
                     first_name: data[i].first_name,
                     last_name: data[i].last_name,
                     address: data[i].address,
-                  }}                 
+                  }               ]
               } 
           }
         }
