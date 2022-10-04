@@ -15,8 +15,23 @@ function mostBlocked (data) {
     //        } 
     // }
 
+        // const keys = Object.keys(statesCount)
+    // let count = 0
+    // mostBlockedStates = []
+
+    // for (let j = 0; j < keys.length; j++) {
+
+    //     if(statesCount[keys[j]] > count) {
+    //         mostBlockedStates = [keys[j]]
+    //         count = statesCount[keys[j]] 
+    //     } else if (statesCount[keys[j]] === count) {
+    //         mostBlockedStates.push(keys[j])
+    //     } 
+    // }
+
     const statesCount = {}
-    let highestNumber;
+    let highestNumber = 0
+
 
     for (let i = 0; i < data.length; i++) {
         
@@ -31,6 +46,9 @@ function mostBlocked (data) {
                       address: data[i].address,
                     }]
             } 
+                if (highestNumber < statesCount[data[i].address.state].count) {
+                    highestNumber = statesCount[data[i].address.state].count
+                }
           } else {
             statesCount[data[i].address.state] = {
                 count: statesCount[data[i].address.state].count + 1,
@@ -41,6 +59,9 @@ function mostBlocked (data) {
                     address: data[i].address,
                   }]
               } 
+                if (highestNumber < statesCount[data[i].address.state].count) {
+                    highestNumber = statesCount[data[i].address.state].count
+            }
           }
 
         } else {
@@ -70,21 +91,8 @@ function mostBlocked (data) {
 
 
     console.log(statesCount)
+    console.log(highestNumber)
 
-
-    // const keys = Object.keys(statesCount)
-    // let count = 0
-    // mostBlockedStates = []
-
-    // for (let j = 0; j < keys.length; j++) {
-
-    //     if(statesCount[keys[j]] > count) {
-    //         mostBlockedStates = [keys[j]]
-    //         count = statesCount[keys[j]] 
-    //     } else if (statesCount[keys[j]] === count) {
-    //         mostBlockedStates.push(keys[j])
-    //     } 
-    // }
 
 
     // let blockedUsers = []
